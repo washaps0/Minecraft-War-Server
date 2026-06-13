@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Как зайти на MWS</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0f140d;
+            color: #f2f4ec;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(12, 18, 10, 0.95);
+            border-bottom: 1px solid #2a3525;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+            text-decoration: none;
+        }
+
+        .logo span {
+            color: #7ea34b;
+        }
+
+        .nav-links a {
+            color: #d2dac9;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #7ea34b;
+        }
+
+        .hero {
+            padding: 90px 0 55px;
+            background:
+                linear-gradient(rgba(15, 20, 13, 0.86), rgba(13, 17, 23, 0.98)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(126, 163, 75, 0.16);
+            border: 1px solid rgba(126, 163, 75, 0.45);
+            color: #a6c77a;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        h1 span {
+            color: #7ea34b;
+        }
+
+        .hero p {
+            color: #d2dac9;
+            font-size: 18px;
+            max-width: 720px;
+        }
+
+        section {
+            padding: 55px 0;
+        }
+
+        .steps {
+            display: grid;
+            gap: 22px;
+        }
+
+        .step {
+            background: #182017;
+            border: 1px solid #2f3a2a;
+            border-radius: 14px;
+            padding: 25px;
+        }
+
+        .step h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .step p {
+            color: #c2ccb7;
+            margin-bottom: 15px;
+        }
+
+        .ip {
+            margin-top: 12px;
+            padding: 16px;
+            background: #0f140d;
+            border: 1px dashed #7ea34b;
+            border-radius: 10px;
+            font-size: 22px;
+            color: #7ea34b;
+            word-break: break-all;
+            display: inline-block;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+
+        .btn-primary {
+            background: #7ea34b;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #668a38;
+        }
+
+        .btn-secondary {
+            border: 1px solid #7ea34b;
+            color: #7ea34b;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(126, 163, 75, 0.14);
+        }
+
+        .warning {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .note {
+            color: #98a68b;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #2a3525;
+            color: #98a68b;
+            background: #0a1009;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                height: auto;
+                padding: 18px 0;
+                flex-direction: column;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            .hero {
+                text-align: center;
+            }
+
+            .btn {
+                display: block;
+                margin-right: 0;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav">
+            <a href="index.html" class="logo">M<span>WS</span></a>
+
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="mechanics.html">Механики</a>
+                <a href="map.html">Карта</a>
+                <a href="schedule.html">График</a>
+                <a href="guide.html">Как зайти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="tag">Инструкция по входу</div>
+        <h1>Как зайти на <span>MWS</span></h1>
+        <p>
+            Ниже расписаны основные шаги: установка сборки, нужная версия Minecraft
+            и IP сервера. Если подключение не работает, есть отдельный способ через WARP.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="steps">
+            <div class="step">
+                <h2>1. Установи моды</h2>
+                <p>
+                    Скачай сборку MWS по ссылке ниже и установи моды в папку клиента Minecraft.
+                </p>
+                <a href="https://drive.google.com/drive/folders/1RfSG6pVRXRAnhiPydwkiqScnFjs2W_80?usp=sharing" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Скачать моды
+                </a>
+            </div>
+
+            <div class="step">
+                <h2>2. Используй правильную версию</h2>
+                <p>
+                    Для входа нужна версия:
+                </p>
+                <div class="ip">Minecraft 1.20.1 Forge</div>
+                <p class="note">
+                    Важно: без OptiFine и без TLSkins, чтобы не было конфликтов со сборкой.
+                </p>
+            </div>
+
+            <div class="step">
+                <h2>3. Зайди на сервер</h2>
+                <p>
+                    Добавь сервер в Minecraft по этому IP:
+                </p>
+                <div class="ip">minecraftwarserver.mcsh.io</div>
+            </div>
+
+            <div class="step warning">
+                <h2>Если не заходит</h2>
+                <p>
+                    Скачай WARP, включи его только на трафик и попробуй зайти снова.
+                    Это может помочь, если у тебя проблемы с маршрутом до сервера.
+                </p>
+                <a href="https://drive.google.com/file/d/1NWNszFOcO9THBHJMumihQfyj0Qaf77dl/view?usp=sharing" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Скачать WARP
+                </a>
+                <a href="index.html" class="btn btn-secondary">Вернуться на главную</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>MWS - Military Warfare Server © 2026</p>
+    </div>
+</footer>
+
+</body>
+</html>

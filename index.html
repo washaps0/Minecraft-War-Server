@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWS - Military Warfare Server</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b100c;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(10, 14, 20, 0.95);
+            border-bottom: 1px solid #2b3a22;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #7fa650;
+        }
+
+        .nav-links a {
+            color: #cfd8c4;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #7fa650;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(rgba(8, 13, 9, 0.86), rgba(8, 13, 9, 0.96)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(127, 166, 80, 0.16);
+            border: 1px solid rgba(127, 166, 80, 0.45);
+            color: #9fca68;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 54px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #7fa650;
+        }
+
+        .hero p {
+            color: #cfd8c4;
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 620px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #7fa650;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6f9145;
+        }
+
+        .btn-secondary {
+            border: 1px solid #7fa650;
+            color: #7fa650;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(127, 166, 80, 0.14);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #9aa892;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 14px;
+            padding: 25px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #7fa650;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: #bdc8b5;
+            font-size: 15px;
+        }
+
+        .features {
+            background: #090d0a;
+        }
+
+        .factions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .faction {
+            border-radius: 14px;
+            padding: 30px;
+            border: 1px solid #2f3f25;
+            background: #141a12;
+        }
+
+        .faction.rf {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .faction.nato {
+            border-left: 5px solid #9fca68;
+        }
+
+        .faction h3 {
+            margin-bottom: 10px;
+        }
+
+        .ip-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ip {
+            margin: 20px 0;
+            padding: 16px;
+            background: #0b100c;
+            border: 1px dashed #7fa650;
+            border-radius: 10px;
+            font-size: 22px;
+            color: #7fa650;
+            word-break: break-all;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #2b3a22;
+            color: #9aa892;
+            background: #090d0a;
+        }
+
+
+        .btn-primary {
+            box-shadow: 0 0 18px rgba(127, 166, 80, 0.22);
+        }
+
+        .card:hover,
+        .faction:hover,
+        .ip-box:hover {
+            box-shadow: 0 0 24px rgba(127, 166, 80, 0.12);
+        }
+
+
+        .page-hero {
+            padding: 90px 0 45px;
+            background:
+                linear-gradient(rgba(8, 13, 9, 0.90), rgba(8, 13, 9, 0.98)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid #2b3a22;
+        }
+
+        .page-hero h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            max-width: 760px;
+            color: #cfd8c4;
+            font-size: 18px;
+        }
+
+        .info-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .info-box h3 {
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .info-box p,
+        .info-box li {
+            color: #bdc8b5;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .map-placeholder {
+            background:
+                linear-gradient(rgba(20, 26, 18, 0.92), rgba(20, 26, 18, 0.92)),
+                repeating-linear-gradient(45deg, #1d2917 0, #1d2917 10px, #172013 10px, #172013 20px);
+            border: 1px dashed #7fa650;
+            border-radius: 18px;
+            padding: 55px 25px;
+            text-align: center;
+            color: #cfd8c4;
+            margin-bottom: 30px;
+        }
+
+        .map-placeholder h2 {
+            margin-bottom: 12px;
+            font-size: 32px;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                height: auto;
+                padding: 18px 0;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .hero {
+                min-height: 75vh;
+                text-align: center;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">M<span>WS</span></div>
+
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="mechanics.html">Механики</a>
+                <a href="map.html">Карта</a>
+                <a href="schedule.html">График</a>
+                <a href="guide.html">Как зайти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <div class="container">
+        <div class="hero-content">
+            <div class="tag">Military Warfare Server</div>
+
+            <h1>Современный военный сервер в <span>Minecraft</span></h1>
+
+            <p>
+                MWS - военно-тактический сервер с современным оружием, техникой,
+                фракциями и командной игрой. Подробности о механиках, карте и входе
+                вынесены на отдельные страницы.
+            </p>
+
+            <div class="buttons">
+                <a href="guide.html" class="btn btn-primary">Как зайти</a>
+                <a href="mechanics.html" class="btn btn-secondary">Механики</a>
+                <a href="map.html" class="btn btn-secondary">Карта</a>
+                <a href="schedule.html" class="btn btn-secondary">График</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about">
+    <div class="container">
+        <div class="section-title">
+            <h2>Что такое MWS?</h2>
+            <p>Военный сервер про фракции, тактику и борьбу за территорию</p>
+        </div>
+
+        <div class="cards">
+            <div class="card">
+                <h3>🔫 Современное оружие</h3>
+                <p>
+                    В основе сервера - современное снаряжение, стрельба, тактика и командные действия.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>🚁 Техника</h3>
+                <p>
+                    Транспорт и военная техника используются для операций, перевозки бойцов и поддержки.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>👥 Фракции</h3>
+                <p>
+                    Игроки выбирают сторону конфликта, вступают во фракции и развивают свою команду.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="factions" class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Фракции</h2>
+            <p>Основные стороны конфликта</p>
+        </div>
+
+        <div class="factions">
+            <div class="faction rf">
+                <h3>RF</h3>
+                <p>
+                    Вооружённые силы Российской Федерации, они выступают главными защитниками сосновки(карта на которой происходят события) и борются за контроль над территорией и ресурсами.
+                </p>
+            </div>
+
+            <div class="faction nato">
+                <h3>NATO</h3>
+                <p>
+                    Организация Североатлантического договора (НАТО) - это военный альянс западных стран, который стремится расширить своё влияние и противостоять RF в борьбе за контроль над территорией и ресурсами.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="join">
+    <div class="container">
+        <div class="section-title">
+            <h2>Как начать играть?</h2>
+            <p>Сначала установи сборку и проверь версию игры</p>
+        </div>
+
+        <div class="ip-box">
+            <h3>Инструкция по входу</h3>
+
+            <p>
+                IP сервера находится на странице инструкции. Сначала скачай моды,
+                проверь версию Minecraft и только потом подключайся.
+            </p>
+
+            <br>
+
+            <a href="guide.html" class="btn btn-primary">Как зайти</a>
+            <a href="https://discord.gg/q3A6Ncnrwr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Discord сервера</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>MWS - Military Warfare Server © 2026</p>
+    </div>
+</footer>
+
+</body>
+</html>

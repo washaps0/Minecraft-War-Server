@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWS - Карта</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b100c;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(10, 14, 20, 0.95);
+            border-bottom: 1px solid #2b3a22;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span {
+            color: #7fa650;
+        }
+
+        .nav-links a {
+            color: #cfd8c4;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #7fa650;
+        }
+
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            background:
+                linear-gradient(rgba(8, 13, 9, 0.86), rgba(8, 13, 9, 0.96)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .hero-content {
+            max-width: 720px;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(127, 166, 80, 0.16);
+            border: 1px solid rgba(127, 166, 80, 0.45);
+            color: #9fca68;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 54px;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        h1 span {
+            color: #7fa650;
+        }
+
+        .hero p {
+            color: #cfd8c4;
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 620px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #7fa650;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #6f9145;
+        }
+
+        .btn-secondary {
+            border: 1px solid #7fa650;
+            color: #7fa650;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(127, 166, 80, 0.14);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #9aa892;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 14px;
+            padding: 25px;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: #7fa650;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .card p {
+            color: #bdc8b5;
+            font-size: 15px;
+        }
+
+        .features {
+            background: #090d0a;
+        }
+
+        .factions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .faction {
+            border-radius: 14px;
+            padding: 30px;
+            border: 1px solid #2f3f25;
+            background: #141a12;
+        }
+
+        .faction.rf {
+            border-left: 5px solid #e74c3c;
+        }
+
+        .faction.nato {
+            border-left: 5px solid #9fca68;
+        }
+
+        .faction h3 {
+            margin-bottom: 10px;
+        }
+
+        .ip-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 16px;
+            padding: 35px;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .ip {
+            margin: 20px 0;
+            padding: 16px;
+            background: #0b100c;
+            border: 1px dashed #7fa650;
+            border-radius: 10px;
+            font-size: 22px;
+            color: #7fa650;
+            word-break: break-all;
+        }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #2b3a22;
+            color: #9aa892;
+            background: #090d0a;
+        }
+
+
+        .btn-primary {
+            box-shadow: 0 0 18px rgba(127, 166, 80, 0.22);
+        }
+
+        .card:hover,
+        .faction:hover,
+        .ip-box:hover {
+            box-shadow: 0 0 24px rgba(127, 166, 80, 0.12);
+        }
+
+
+        .page-hero {
+            padding: 90px 0 45px;
+            background:
+                linear-gradient(rgba(8, 13, 9, 0.90), rgba(8, 13, 9, 0.98)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid #2b3a22;
+        }
+
+        .page-hero h1 {
+            font-size: 46px;
+            margin-bottom: 15px;
+        }
+
+        .page-hero p {
+            max-width: 760px;
+            color: #cfd8c4;
+            font-size: 18px;
+        }
+
+        .info-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .info-box h3 {
+            margin-bottom: 12px;
+            color: #ffffff;
+            font-size: 24px;
+        }
+
+        .info-box p,
+        .info-box li {
+            color: #bdc8b5;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .map-placeholder {
+            background:
+                linear-gradient(rgba(20, 26, 18, 0.92), rgba(20, 26, 18, 0.92)),
+                repeating-linear-gradient(45deg, #1d2917 0, #1d2917 10px, #172013 10px, #172013 20px);
+            border: 1px dashed #7fa650;
+            border-radius: 18px;
+            padding: 55px 25px;
+            text-align: center;
+            color: #cfd8c4;
+            margin-bottom: 30px;
+        }
+
+        .map-placeholder h2 {
+            margin-bottom: 12px;
+            font-size: 32px;
+        }
+
+
+        .map-preview {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 30px;
+        }
+
+        .map-image {
+            display: block;
+            width: 100%;
+            max-height: 620px;
+            object-fit: contain;
+            border-radius: 14px;
+            border: 1px solid #2f3f25;
+            cursor: zoom-in;
+            background: #090d0a;
+        }
+
+        .map-preview p {
+            color: #bdc8b5;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+        .map-legend {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .legend-item {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 14px;
+            padding: 18px;
+            color: #bdc8b5;
+        }
+
+        .legend-dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            margin-right: 8px;
+            vertical-align: middle;
+        }
+
+        .legend-red { background: #e74c3c; box-shadow: 0 0 14px rgba(231, 76, 60, 0.45); }
+        .legend-blue { background: #4f8cff; box-shadow: 0 0 14px rgba(79, 140, 255, 0.45); }
+        .legend-yellow { background: #ffd84d; box-shadow: 0 0 14px rgba(255, 216, 77, 0.45); }
+
+        .map-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            background: rgba(3, 6, 4, 0.94);
+            padding: 22px;
+        }
+
+        .map-modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .map-modal-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .map-modal-title {
+            color: #cfd8c4;
+            font-weight: bold;
+        }
+
+        .map-controls {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .map-control-btn {
+            border: 1px solid #7fa650;
+            background: #141a12;
+            color: #cfd8c4;
+            padding: 9px 13px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .map-control-btn:hover {
+            background: rgba(127, 166, 80, 0.14);
+        }
+
+        .map-modal-view {
+            flex: 1;
+            overflow: auto;
+            border: 1px solid #2f3f25;
+            border-radius: 14px;
+            background: #050805;
+            cursor: default;
+        }
+
+        .map-modal-view.middle-dragging { cursor: grabbing; }
+
+        .map-modal-img {
+            display: block;
+            transform-origin: top left;
+            transition: transform 0.08s ease;
+            max-width: none;
+            user-select: none;
+            -webkit-user-drag: none;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                height: auto;
+                padding: 18px 0;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 38px;
+            }
+
+            .hero {
+                min-height: 75vh;
+                text-align: center;
+            }
+
+            .buttons {
+                justify-content: center;
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">M<span>WS</span></div>
+
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="mechanics.html">Механики</a>
+                <a href="map.html">Карта</a>
+                <a href="schedule.html">График</a>
+                <a href="guide.html">Как зайти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="tag">Карта сервера</div>
+        <h1>Карта <span>MWS</span></h1>
+        <p>
+            Здесь находится карта сервера и основные обозначения:
+            базы фракций и точки, за которые идёт борьба.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="map-preview">
+            <img src="map.png" alt="Карта MWS" class="map-image" id="mapImage">
+            <p>Нажми на карту, чтобы открыть её в большом размере. Колёсико мыши - приближение, зажатое колёсико - перемещение.</p>
+        </div>
+
+        <div class="map-legend">
+            <div class="legend-item">
+                <span class="legend-dot legend-red"></span>
+                <strong>Красный</strong> - база RF
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot legend-blue"></span>
+                <strong>Синий</strong> - база NATO
+            </div>
+
+            <div class="legend-item">
+                <span class="legend-dot legend-yellow"></span>
+                <strong>Жёлтый</strong> - точки
+            </div>
+        </div>
+
+
+        <div class="map-modal" id="mapModal">
+            <div class="map-modal-top">
+                <div class="map-modal-title">Карта MWS</div>
+                <div class="map-controls">
+                    <button class="map-control-btn" id="zoomOut">−</button>
+                    <button class="map-control-btn" id="zoomReset">100%</button>
+                    <button class="map-control-btn" id="zoomIn">+</button>
+                    <button class="map-control-btn" id="closeMap">Закрыть</button>
+                </div>
+            </div>
+
+            <div class="map-modal-view" id="mapView">
+                <img src="map.png" alt="Карта MWS" class="map-modal-img" id="mapModalImage">
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>MWS - Military Warfare Server © 2026</p>
+    </div>
+</footer>
+
+
+<script>
+    const mapImage = document.getElementById("mapImage");
+    const mapModal = document.getElementById("mapModal");
+    const mapView = document.getElementById("mapView");
+    const mapModalImage = document.getElementById("mapModalImage");
+    const closeMap = document.getElementById("closeMap");
+    const zoomIn = document.getElementById("zoomIn");
+    const zoomOut = document.getElementById("zoomOut");
+    const zoomReset = document.getElementById("zoomReset");
+
+    let zoom = 1;
+    let middleDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let scrollLeft = 0;
+    let scrollTop = 0;
+
+    function updateZoom() {
+        mapModalImage.style.transform = `scale(${zoom})`;
+        zoomReset.textContent = Math.round(zoom * 100) + "%";
+    }
+
+    function zoomTo(newZoom, centerX, centerY) {
+        const oldZoom = zoom;
+        newZoom = Math.max(0.5, Math.min(newZoom, 5));
+
+        const imageX = (mapView.scrollLeft + centerX) / oldZoom;
+        const imageY = (mapView.scrollTop + centerY) / oldZoom;
+
+        zoom = newZoom;
+        updateZoom();
+
+        mapView.scrollLeft = imageX * zoom - centerX;
+        mapView.scrollTop = imageY * zoom - centerY;
+    }
+
+    function zoomToCenter(newZoom) {
+        zoomTo(newZoom, mapView.clientWidth / 2, mapView.clientHeight / 2);
+    }
+
+    function openMap() {
+        mapModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+        zoom = 1;
+        updateZoom();
+
+        setTimeout(() => {
+            mapView.scrollLeft = Math.max(0, (mapModalImage.clientWidth - mapView.clientWidth) / 2);
+            mapView.scrollTop = Math.max(0, (mapModalImage.clientHeight - mapView.clientHeight) / 2);
+        }, 50);
+    }
+
+    function closeMapModal() {
+        mapModal.classList.remove("active");
+        document.body.style.overflow = "";
+        middleDragging = false;
+        mapView.classList.remove("middle-dragging");
+    }
+
+    mapImage.addEventListener("click", openMap);
+    closeMap.addEventListener("click", closeMapModal);
+
+    zoomIn.addEventListener("click", () => {
+        zoomToCenter(zoom + 0.25);
+    });
+
+    zoomOut.addEventListener("click", () => {
+        zoomToCenter(zoom - 0.25);
+    });
+
+    zoomReset.addEventListener("click", () => {
+        zoomToCenter(1);
+    });
+
+    // Стандартное приближение: колёсико мыши
+    mapView.addEventListener("wheel", (event) => {
+        event.preventDefault();
+
+        const rect = mapView.getBoundingClientRect();
+        const mouseX = event.clientX - rect.left;
+        const mouseY = event.clientY - rect.top;
+
+        const nextZoom = event.deltaY < 0 ? zoom + 0.18 : zoom - 0.18;
+        zoomTo(nextZoom, mouseX, mouseY);
+    }, { passive: false });
+
+    // Перемещение только через нажатое колёсико мыши
+    mapView.addEventListener("mousedown", (event) => {
+        if (event.button !== 1) return;
+
+        event.preventDefault();
+        middleDragging = true;
+
+        startX = event.pageX;
+        startY = event.pageY;
+        scrollLeft = mapView.scrollLeft;
+        scrollTop = mapView.scrollTop;
+
+        mapView.classList.add("middle-dragging");
+    });
+
+    window.addEventListener("mouseup", (event) => {
+        if (event.button !== 1) return;
+
+        middleDragging = false;
+        mapView.classList.remove("middle-dragging");
+    });
+
+    window.addEventListener("mousemove", (event) => {
+        if (!middleDragging) return;
+
+        event.preventDefault();
+        mapView.scrollLeft = scrollLeft - (event.pageX - startX);
+        mapView.scrollTop = scrollTop - (event.pageY - startY);
+    });
+
+    // Отключаем автоскролл браузера при клике колёсиком по карте
+    mapView.addEventListener("auxclick", (event) => {
+        if (event.button === 1) {
+            event.preventDefault();
+        }
+    });
+
+    window.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+            closeMapModal();
+        }
+    });
+</script>
+
+</body>
+</html>
