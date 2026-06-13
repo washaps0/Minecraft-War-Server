@@ -444,6 +444,46 @@
             -webkit-user-drag: none;
         }
 
+
+        .canva-map-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 18px;
+            padding: 18px;
+            margin-bottom: 30px;
+            box-shadow: 0 0 24px rgba(127, 166, 80, 0.10);
+        }
+
+        .canva-frame-wrap {
+            position: relative;
+            width: 100%;
+            height: 0;
+            padding-top: 77.7344%;
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #2f3f25;
+            background: #090d0a;
+        }
+
+        .canva-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            border: 0;
+            display: block;
+            background: #090d0a;
+        }
+
+        .canva-map-box p {
+            color: #bdc8b5;
+            text-align: center;
+            margin-top: 12px;
+            font-size: 14px;
+        }
+
+
         @media (max-width: 700px) {
             .nav {
                 height: auto;
@@ -497,50 +537,36 @@
         <div class="tag">Карта сервера</div>
         <h1>Карта <span>MWS</span></h1>
         <p>
-            Здесь находится карта сервера и основные обозначения:
-            базы фракций и точки, за которые идёт борьба.
+            Здесь находится актуальная карта MWS из Canva. Если карта изменится в Canva,
+            на сайте она тоже будет показывать обновлённую версию.
         </p>
     </div>
 </section>
 
 <section>
     <div class="container">
-        <div class="map-preview">
-            <img src="map.png" alt="Карта MWS" class="map-image" id="mapImage">
-            <p>Нажми на карту, чтобы открыть её в большом размере. Колёсико мыши - приближение, зажатое колёсико - перемещение.</p>
-        </div>
-
-        <div class="map-legend">
-            <div class="legend-item">
-                <span class="legend-dot legend-red"></span>
-                <strong>Красный</strong> - база RF
+        <div class="canva-map-box">
+            <div class="canva-frame-wrap">
+                <iframe
+                    class="canva-frame"
+                    loading="lazy"
+                    src="https://www.canva.com/design/DAHMdkCGzVU/nVanNVO7ydqxA-owRZmYXg/view?embed"
+                    allowfullscreen="allowfullscreen"
+                    allow="fullscreen">
+                </iframe>
             </div>
 
-            <div class="legend-item">
-                <span class="legend-dot legend-blue"></span>
-                <strong>Синий</strong> - база NATO
-            </div>
+            <p>
+                Карта загружается напрямую из Canva. Если она не открывается внутри сайта,
+                нажми кнопку ниже и открой карту в новой вкладке.
+            </p>
 
-            <div class="legend-item">
-                <span class="legend-dot legend-yellow"></span>
-                <strong>Жёлтый</strong> - точки
-            </div>
-        </div>
+            <br>
 
-
-        <div class="map-modal" id="mapModal">
-            <div class="map-modal-top">
-                <div class="map-modal-title">Карта MWS</div>
-                <div class="map-controls">
-                    <button class="map-control-btn" id="zoomOut">−</button>
-                    <button class="map-control-btn" id="zoomReset">100%</button>
-                    <button class="map-control-btn" id="zoomIn">+</button>
-                    <button class="map-control-btn" id="closeMap">Закрыть</button>
-                </div>
-            </div>
-
-            <div class="map-modal-view" id="mapView">
-                <img src="map.png" alt="Карта MWS" class="map-modal-img" id="mapModalImage">
+            <div class="buttons" style="justify-content: center;">
+                <a href="https://www.canva.com/design/DAHMdkCGzVU/nVanNVO7ydqxA-owRZmYXg/view?utm_content=DAHMdkCGzVU&utm_campaign=designshare&utm_medium=embeds&utm_source=link" class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+                    Открыть карту в Canva
+                </a>
             </div>
         </div>
     </div>
@@ -553,135 +579,7 @@
 </footer>
 
 
-<script>
-    const mapImage = document.getElementById("mapImage");
-    const mapModal = document.getElementById("mapModal");
-    const mapView = document.getElementById("mapView");
-    const mapModalImage = document.getElementById("mapModalImage");
-    const closeMap = document.getElementById("closeMap");
-    const zoomIn = document.getElementById("zoomIn");
-    const zoomOut = document.getElementById("zoomOut");
-    const zoomReset = document.getElementById("zoomReset");
 
-    let zoom = 1;
-    let middleDragging = false;
-    let startX = 0;
-    let startY = 0;
-    let scrollLeft = 0;
-    let scrollTop = 0;
-
-    function updateZoom() {
-        mapModalImage.style.transform = `scale(${zoom})`;
-        zoomReset.textContent = Math.round(zoom * 100) + "%";
-    }
-
-    function zoomTo(newZoom, centerX, centerY) {
-        const oldZoom = zoom;
-        newZoom = Math.max(0.5, Math.min(newZoom, 5));
-
-        const imageX = (mapView.scrollLeft + centerX) / oldZoom;
-        const imageY = (mapView.scrollTop + centerY) / oldZoom;
-
-        zoom = newZoom;
-        updateZoom();
-
-        mapView.scrollLeft = imageX * zoom - centerX;
-        mapView.scrollTop = imageY * zoom - centerY;
-    }
-
-    function zoomToCenter(newZoom) {
-        zoomTo(newZoom, mapView.clientWidth / 2, mapView.clientHeight / 2);
-    }
-
-    function openMap() {
-        mapModal.classList.add("active");
-        document.body.style.overflow = "hidden";
-        zoom = 1;
-        updateZoom();
-
-        setTimeout(() => {
-            mapView.scrollLeft = Math.max(0, (mapModalImage.clientWidth - mapView.clientWidth) / 2);
-            mapView.scrollTop = Math.max(0, (mapModalImage.clientHeight - mapView.clientHeight) / 2);
-        }, 50);
-    }
-
-    function closeMapModal() {
-        mapModal.classList.remove("active");
-        document.body.style.overflow = "";
-        middleDragging = false;
-        mapView.classList.remove("middle-dragging");
-    }
-
-    mapImage.addEventListener("click", openMap);
-    closeMap.addEventListener("click", closeMapModal);
-
-    zoomIn.addEventListener("click", () => {
-        zoomToCenter(zoom + 0.25);
-    });
-
-    zoomOut.addEventListener("click", () => {
-        zoomToCenter(zoom - 0.25);
-    });
-
-    zoomReset.addEventListener("click", () => {
-        zoomToCenter(1);
-    });
-
-    // Стандартное приближение: колёсико мыши
-    mapView.addEventListener("wheel", (event) => {
-        event.preventDefault();
-
-        const rect = mapView.getBoundingClientRect();
-        const mouseX = event.clientX - rect.left;
-        const mouseY = event.clientY - rect.top;
-
-        const nextZoom = event.deltaY < 0 ? zoom + 0.18 : zoom - 0.18;
-        zoomTo(nextZoom, mouseX, mouseY);
-    }, { passive: false });
-
-    // Перемещение только через нажатое колёсико мыши
-    mapView.addEventListener("mousedown", (event) => {
-        if (event.button !== 1) return;
-
-        event.preventDefault();
-        middleDragging = true;
-
-        startX = event.pageX;
-        startY = event.pageY;
-        scrollLeft = mapView.scrollLeft;
-        scrollTop = mapView.scrollTop;
-
-        mapView.classList.add("middle-dragging");
-    });
-
-    window.addEventListener("mouseup", (event) => {
-        if (event.button !== 1) return;
-
-        middleDragging = false;
-        mapView.classList.remove("middle-dragging");
-    });
-
-    window.addEventListener("mousemove", (event) => {
-        if (!middleDragging) return;
-
-        event.preventDefault();
-        mapView.scrollLeft = scrollLeft - (event.pageX - startX);
-        mapView.scrollTop = scrollTop - (event.pageY - startY);
-    });
-
-    // Отключаем автоскролл браузера при клике колёсиком по карте
-    mapView.addEventListener("auxclick", (event) => {
-        if (event.button === 1) {
-            event.preventDefault();
-        }
-    });
-
-    window.addEventListener("keydown", (event) => {
-        if (event.key === "Escape") {
-            closeMapModal();
-        }
-    });
-</script>
 
 </body>
 </html>
