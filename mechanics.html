@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MWS — Механики</title>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #0b100c;
+            color: #f1f1f1;
+            line-height: 1.6;
+        }
+
+        header {
+            background: rgba(10, 14, 20, 0.95);
+            border-bottom: 1px solid #2b3a22;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .nav {
+            min-height: 70px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: #ffffff;
+        }
+
+        .logo span { color: #7fa650; }
+
+        .nav-links a {
+            color: #cfd8c4;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 15px;
+            transition: 0.2s;
+        }
+
+        .nav-links a:hover { color: #7fa650; }
+
+        .page-hero {
+            padding: 90px 0 50px;
+            background:
+                linear-gradient(rgba(8, 13, 9, 0.90), rgba(8, 13, 9, 0.98)),
+                url("background.png");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border-bottom: 1px solid #2b3a22;
+        }
+
+        .tag {
+            display: inline-block;
+            background: rgba(127, 166, 80, 0.16);
+            border: 1px solid rgba(127, 166, 80, 0.45);
+            color: #9fca68;
+            padding: 8px 14px;
+            border-radius: 30px;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 48px;
+            line-height: 1.1;
+            margin-bottom: 18px;
+        }
+
+        .page-hero p {
+            max-width: 760px;
+            color: #cfd8c4;
+            font-size: 18px;
+        }
+
+        section { padding: 70px 0; }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 34px;
+            margin-bottom: 10px;
+        }
+
+        .section-title p { color: #9aa892; }
+
+        .mechanics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .mechanic {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 14px;
+            padding: 24px;
+            transition: 0.2s;
+        }
+
+        .mechanic:hover {
+            transform: translateY(-4px);
+            border-color: #7fa650;
+            box-shadow: 0 0 24px rgba(127, 166, 80, 0.12);
+        }
+
+        .mechanic h3 {
+            color: #ffffff;
+            font-size: 22px;
+            margin-bottom: 12px;
+        }
+
+        .mechanic p,
+        .mechanic li {
+            color: #bdc8b5;
+            font-size: 15px;
+        }
+
+        .mechanic ul {
+            margin-left: 18px;
+            margin-top: 10px;
+        }
+
+        .info-box {
+            background: #141a12;
+            border: 1px solid #2f3f25;
+            border-radius: 16px;
+            padding: 28px;
+            margin-bottom: 25px;
+        }
+
+        .info-box h3 {
+            font-size: 24px;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .info-box p,
+        .info-box li {
+            color: #bdc8b5;
+        }
+
+        .info-box ul {
+            margin-left: 20px;
+            margin-top: 10px;
+        }
+
+        .features { background: #090d0a; }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+
+        .btn-primary {
+            background: #7fa650;
+            color: white;
+            box-shadow: 0 0 18px rgba(127, 166, 80, 0.22);
+        }
+
+        .btn-primary:hover { background: #6f9145; }
+
+        .btn-secondary {
+            border: 1px solid #7fa650;
+            color: #7fa650;
+        }
+
+        .btn-secondary:hover { background: rgba(127, 166, 80, 0.14); }
+
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid #2b3a22;
+            color: #9aa892;
+            background: #090d0a;
+        }
+
+        @media (max-width: 700px) {
+            .nav {
+                padding: 18px 0;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links a {
+                margin: 0 8px;
+                font-size: 14px;
+            }
+
+            h1 { font-size: 38px; }
+
+            .page-hero {
+                text-align: center;
+                padding: 70px 0 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="container">
+        <div class="nav">
+            <div class="logo">M<span>WS</span></div>
+
+            <div class="nav-links">
+                <a href="index.html">Главная</a>
+                <a href="mechanics.html">Механики</a>
+                <a href="map.html">Карта</a>
+                <a href="schedule.html">Расписание</a>
+                <a href="guide.html">Как зайти</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<section class="page-hero">
+    <div class="container">
+        <div class="tag">Механики сервера</div>
+
+        <h1>Как устроен MWS</h1>
+
+        <p>
+            На этой странице коротко описаны основные механики сервера:
+            фракции, деньги, снаряжение, работы, транспорт, территории и бои.
+        </p>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="section-title">
+            <h2>Основные механики</h2>
+            <p>Без лишних деталей, только то, что нужно знать игроку</p>
+        </div>
+
+        <div class="mechanics-grid">
+            <div class="mechanic">
+                <h3>Фракции</h3>
+                <p>
+                    На сервере есть две стороны: RF и NATO. Игрок вступает в одну из них
+                    и играет вместе со своей фракцией.
+                </p>
+                <ul>
+                    <li>у каждой фракции есть своя база;</li>
+                    <li>у каждой фракции есть общая казна;</li>
+                    <li>игроки одной фракции вместе выполняют задачи и участвуют в боях.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Казна фракции</h3>
+                <p>
+                    Деньги хранятся не только у игроков, но и в общей казне фракции.
+                    Из этой казны покупается снаряжение и другие нужные предметы.
+                </p>
+            </div>
+
+            <div class="mechanic">
+                <h3>Снаряжение</h3>
+                <p>
+                    Оружие, броня и наборы не выдаются просто так. Их нужно покупать
+                    за деньги фракции в магазине.
+                </p>
+                <ul>
+                    <li>чем лучше экономика фракции, тем проще снабжать игроков;</li>
+                    <li>перед боем нужно подготовиться и взять нужный набор;</li>
+                    <li>снаряжение зависит от того, что есть в магазине.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Работы</h3>
+                <p>
+                    Работы нужны, чтобы фракции могли зарабатывать деньги.
+                    Сейчас есть грузчик и курьер.
+                </p>
+                <ul>
+                    <li>грузчик переносит ящики между точками;</li>
+                    <li>курьер доставляет транспорт до случайной точки;</li>
+                    <li>деньги за работу идут в казну фракции.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Курьер</h3>
+                <p>
+                    Курьер получает транспорт, едет до точки доставки и возвращает машину
+                    обратно в инвентарь. После этого доставка засчитывается.
+                </p>
+                <ul>
+                    <li>точка доставки выбирается случайно;</li>
+                    <li>на экране показывается направление и дистанция;</li>
+                    <li>доставку можно начать рядом со спавном транспорта своей фракции.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Транспорт</h3>
+                <p>
+                    Транспорт используется для поездок, доставки, перемещения игроков
+                    и участия в событиях. Без транспорта часто будет сложно быстро добраться
+                    до нужной зоны.
+                </p>
+            </div>
+
+            <div class="mechanic">
+                <h3>Территории</h3>
+                <p>
+                    Вместо старых боёв за точки теперь используются территории.
+                    Фракции смотрят карту, выбирают место боя и договариваются о начале
+                    боевых действий.
+                </p>
+            </div>
+
+            <div class="mechanic">
+                <h3>Бои</h3>
+                <p>
+                    Перед боем есть время на подготовку. После этого начинается бой,
+                    который длится ограниченное время.
+                </p>
+                <ul>
+                    <li>подготовка длится 5 минут;</li>
+                    <li>сам бой длится 10 минут;</li>
+                    <li>во время боя считаются убийства RF и NATO;</li>
+                    <li>побеждает фракция, у которой больше убийств.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Rally</h3>
+                <p>
+                    Rally — это временная точка для быстрого возвращения в бой.
+                    Игрок появляется на базе, берёт снаряжение и может телепортироваться
+                    на rally своей фракции.
+                </p>
+                <ul>
+                    <li>rally можно ставить только во время боя или подготовки;</li>
+                    <li>ставить rally могут лидер, заместитель или админ;</li>
+                    <li>переставлять rally можно раз в 2 минуты.</li>
+                </ul>
+            </div>
+
+            <div class="mechanic">
+                <h3>Карта</h3>
+                <p>
+                    Основная карта территорий находится отдельно на сайте.
+                    В Minecraft не нужно выбирать конкретные точки — лидер просто пишет
+                    понятное место боя, например: “город у моста” или “лесополоса у базы”.
+                </p>
+            </div>
+
+            <div class="mechanic">
+                <h3>Голосовой чат</h3>
+                <p>
+                    На сервере используется голосовой чат. Он нужен для общения внутри
+                    фракции, координации в бою и обычной игры.
+                </p>
+            </div>
+
+            <div class="mechanic">
+                <h3>Правила входа</h3>
+                <p>
+                    Чтобы зайти на сервер, нужна версия Minecraft 1.20.1 Forge и сборка модов.
+                    IP находится на странице с инструкцией.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="container">
+        <div class="section-title">
+            <h2>Как обычно проходит бой</h2>
+            <p>Примерный порядок действий</p>
+        </div>
+
+        <div class="info-box">
+            <h3>1. Фракция выбирает место</h3>
+            <p>
+                Лидер или ответственный игрок выбирает территорию на карте и сообщает,
+                где будет бой.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>2. Начинается подготовка</h3>
+            <p>
+                У фракций есть 5 минут, чтобы доехать до зоны, взять снаряжение
+                и поставить rally.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>3. Идёт бой</h3>
+            <p>
+                Бой длится 10 минут. Система считает убийства обеих сторон.
+                Текущий счёт показывается игрокам во время боя.
+            </p>
+        </div>
+
+        <div class="info-box">
+            <h3>4. Определяется победитель</h3>
+            <p>
+                Побеждает фракция, у которой к концу боя больше убийств.
+                Если счёт равный, территория не меняется.
+            </p>
+        </div>
+
+        <div class="buttons">
+            <a href="map.html" class="btn btn-primary">Карта</a>
+            <a href="guide.html" class="btn btn-secondary">Как зайти</a>
+            <a href="index.html" class="btn btn-secondary">На главную</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container">
+        <p>MWS © 2026</p>
+    </div>
+</footer>
+
+</body>
+</html>
