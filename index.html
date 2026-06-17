@@ -1,236 +1,84 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MWS</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; background: #0b100c; color: #f1f1f1; line-height: 1.6; }
-        header { background: rgba(10, 14, 20, 0.95); border-bottom: 1px solid #2b3a22; position: sticky; top: 0; z-index: 10; }
-        .container { width: 90%; max-width: 1200px; margin: 0 auto; }
-        .nav { min-height: 70px; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 26px; font-weight: bold; letter-spacing: 2px; color: #ffffff; }
-        .logo span { color: #7fa650; }
-        .nav-links a { color: #cfd8c4; text-decoration: none; margin-left: 25px; font-size: 15px; transition: 0.2s; }
-        .nav-links a:hover { color: #7fa650; }
-
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            background:
-                linear-gradient(rgba(8, 13, 9, 0.86), rgba(8, 13, 9, 0.96)),
-                url("background.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .hero-content { max-width: 720px; }
-        .tag {
-            display: inline-block;
-            background: rgba(127, 166, 80, 0.16);
-            border: 1px solid rgba(127, 166, 80, 0.45);
-            color: #9fca68;
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        h1 { font-size: 54px; line-height: 1.1; margin-bottom: 20px; }
-        .hero p { color: #cfd8c4; font-size: 18px; margin-bottom: 30px; max-width: 620px; }
-        .buttons { display: flex; gap: 15px; flex-wrap: wrap; }
-        .btn { display: inline-block; padding: 14px 24px; border-radius: 8px; text-decoration: none; font-weight: bold; transition: 0.2s; }
-        .btn-primary { background: #7fa650; color: white; box-shadow: 0 0 18px rgba(127, 166, 80, 0.22); }
-        .btn-primary:hover { background: #6f9145; }
-        .btn-secondary { border: 1px solid #7fa650; color: #7fa650; }
-        .btn-secondary:hover { background: rgba(127, 166, 80, 0.14); }
-
-        section { padding: 80px 0; }
-        .section-title { text-align: center; margin-bottom: 45px; }
-        .section-title h2 { font-size: 36px; margin-bottom: 10px; }
-        .section-title p { color: #9aa892; }
-
-        .cards, .factions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .card, .faction, .ip-box {
-            background: #141a12;
-            border: 1px solid #2f3f25;
-            border-radius: 14px;
-            padding: 25px;
-            transition: 0.2s;
-        }
-
-        .card:hover, .faction:hover, .ip-box:hover {
-            transform: translateY(-4px);
-            border-color: #7fa650;
-            box-shadow: 0 0 24px rgba(127, 166, 80, 0.12);
-        }
-
-        .card h3, .faction h3, .ip-box h3 { font-size: 22px; margin-bottom: 12px; color: #ffffff; }
-        .card p, .faction p, .ip-box p { color: #bdc8b5; font-size: 15px; }
-        .features { background: #090d0a; }
-        .faction.rf { border-left: 5px solid #e74c3c; }
-        .faction.nato { border-left: 5px solid #4b7bec; }
-        .ip-box { text-align: center; max-width: 700px; margin: 0 auto; }
-
-        footer {
-            padding: 30px 0;
-            text-align: center;
-            border-top: 1px solid #2b3a22;
-            color: #9aa892;
-            background: #090d0a;
-        }
-
-        @media (max-width: 700px) {
-            .nav { padding: 18px 0; flex-direction: column; gap: 12px; }
-            .nav-links a { margin: 0 8px; font-size: 14px; }
-            h1 { font-size: 38px; }
-            .hero { min-height: 75vh; text-align: center; }
-            .buttons { justify-content: center; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Washapso's Community Server</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0b1020;color:#f2f6ff;line-height:1.6}
+header{background:rgba(8,13,28,.95);border-bottom:1px solid #23345f;position:sticky;top:0;z-index:10}
+.container{width:90%;max-width:1100px;margin:0 auto}
+.nav{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.logo{font-size:24px;font-weight:bold;letter-spacing:1px;color:#fff;text-decoration:none}
+.logo span{color:#4f8cff}
+.nav-links a{color:#d7e4ff;text-decoration:none;margin-left:22px;font-size:15px;transition:.2s}
+.nav-links a:hover{color:#4f8cff}
+.hero{padding:95px 0 65px;background:linear-gradient(rgba(8,13,28,.86),rgba(7,11,24,.98)),url("background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero.home{min-height:82vh;display:flex;align-items:center}
+.hero-content{max-width:760px}
+.tag{display:inline-block;background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.45);color:#8fb7ff;padding:8px 14px;border-radius:30px;font-size:14px;margin-bottom:20px}
+h1{font-size:48px;line-height:1.1;margin-bottom:18px}
+h1 span{color:#4f8cff}
+.hero p{color:#d7e4ff;font-size:18px;max-width:760px;margin-bottom:28px}
+section{padding:60px 0}.features{background:#080d1a}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title h2{font-size:34px;margin-bottom:10px}.section-title p{color:#91a7d6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card,.step,.ip-box{background:#101a33;border:1px solid #2a3f73;border-radius:14px;padding:25px;transition:.2s}
+.card:hover,.step:hover,.ip-box:hover{transform:translateY(-3px);border-color:#4f8cff;box-shadow:0 0 22px rgba(79,140,255,.10)}
+.card h3,.step h2,.ip-box h3{color:#fff;font-size:22px;margin-bottom:12px}
+.card p,.step p,.ip-box p,li{color:#c7d6f2;font-size:15px}
+ul{margin-left:20px;margin-top:10px}
+.buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 22px;border-radius:8px;text-decoration:none;font-weight:bold;transition:.2s;margin-top:5px}
+.btn-primary{background:#4f8cff;color:white;box-shadow:0 0 18px rgba(79,140,255,.20)}
+.btn-primary:hover{background:#3f72d6}
+.btn-secondary{border:1px solid #4f8cff;color:#4f8cff}
+.btn-secondary:hover{background:rgba(79,140,255,.14)}
+.ip{margin-top:12px;padding:16px;background:#0b1020;border:1px dashed #4f8cff;border-radius:10px;font-size:21px;color:#4f8cff;word-break:break-all;display:inline-block}
+.steps{display:grid;gap:22px}.warning{border-left:5px solid #d8674a}.note{color:#91a7d6;font-size:14px;margin-top:10px}
+.time-schedule{max-width:760px;margin:0 auto;background:#101a33;border:1px solid #2a3f73;border-radius:18px;overflow:hidden;box-shadow:0 0 24px rgba(79,140,255,.10)}
+.time-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid #2a3f73;transition:.2s}
+.time-row:last-child{border-bottom:none}.time-row:hover{background:rgba(79,140,255,.08)}
+.time-cell{padding:18px;color:#c7d6f2}.time-cell:first-child{border-right:1px solid #2a3f73;color:#8fb7ff;font-weight:bold;font-size:18px;text-align:center;background:#0d162b}
+.time-note{max-width:760px;margin:28px auto 0;background:rgba(79,140,255,.10);border:1px solid rgba(79,140,255,.35);border-radius:16px;padding:22px;color:#d7e4ff;text-align:center}
+footer{padding:30px 0;text-align:center;border-top:1px solid #23345f;color:#91a7d6;background:#080d1a}
+@media(max-width:700px){.nav{padding:18px 0;flex-direction:column}.nav-links{text-align:center}.nav-links a{margin:0 8px;font-size:14px}h1{font-size:36px}.hero{text-align:center}.buttons{justify-content:center}.time-row{grid-template-columns:1fr}.time-cell:first-child{border-right:none;border-bottom:1px solid #2a3f73}.time-cell{text-align:center}}
+</style>
 </head>
-
 <body>
+<header><div class="container"><div class="nav">
+<a href="index.html" class="logo">Washapso<span>'s Community</span></a>
+<div class="nav-links">
+<a href="index.html">Главная</a>
+<a href="mechanics.html">Механики</a>
+<a href="schedule.html">Расписание</a>
+<a href="guide.html">Как зайти</a>
+</div></div></div></header>
 
-<header>
-    <div class="container">
-        <div class="nav">
-            <div class="logo">M<span>WS</span></div>
-            <div class="nav-links">
-                <a href="index.html">Главная</a>
-                <a href="mechanics.html">Механики</a>
-                <a href="map.html">Карта</a>
-                <a href="schedule.html">Расписание</a>
-                <a href="guide.html">Как зайти</a>
-            </div>
-        </div>
-    </div>
-</header>
+<section class="hero home"><div class="container"><div class="hero-content">
+<div class="tag">Minecraft community server</div>
+<h1>Washapso's Community Server</h1>
+<p>Небольшой сервер, где игроки строят город с нуля и пытаются не дать ему развалиться. Здесь есть экономика, роли, выборы правителя, законы, торговля, работа и конфликты между игроками.</p>
+<div class="buttons"><a href="guide.html" class="btn btn-primary">Как зайти</a><a href="mechanics.html" class="btn btn-secondary">Механики</a><a href="schedule.html" class="btn btn-secondary">Расписание</a></div>
+</div></div></section>
+<section><div class="container"><div class="section-title"><h2>О сервере</h2><p>Главная идея — построить живой город силами игроков</p></div>
+<div class="cards">
+<div class="card"><h3>Город с нуля</h3><p>В начале есть почти пустая карта и группа игроков. Город, дома, районы, фермы, шахты и дороги появляются постепенно.</p></div>
+<div class="card"><h3>Выборы правителя</h3><p>Каждые 3 дня проходят выборы. Правитель пишет законы, назначает помощников, собирает армию и отвечает за развитие города.</p></div>
+<div class="card"><h3>Экономика игроков</h3><p>Игроки сами выбирают занятие: добыча ресурсов, фермерство, торговля, охрана, строительство, политика или поиск редких предметов.</p></div>
+</div></div></section>
+<section class="features"><div class="container"><div class="section-title"><h2>В чём смысл</h2><p>Сервер не про готовый город, а про историю, которую создают игроки</p></div>
+<div class="cards">
+<div class="card"><h3>Жители</h3><p>Игрок начинает как обычный житель. Он ищет работу, знакомится с людьми, зарабатывает первые деньги и постепенно получает репутацию.</p></div>
+<div class="card"><h3>Власть и законы</h3><p>Правитель может развивать город свободно или жёстко контролировать ресурсы. Если людям это не понравится, они могут начать протест или восстание.</p></div>
+<div class="card"><h3>Опасные места</h3><p>В шахтах и подземельях можно найти ценные ресурсы и редкие предметы. Их можно использовать самому или продать другим игрокам.</p></div>
+</div></div></section>
+<section><div class="container"><div class="ip-box"><h3>Хочешь зайти?</h3><p>Для входа нужна сборка модов и Minecraft 1.20.1 Forge. IP сервера находится на странице инструкции.</p><br>
+<a href="guide.html" class="btn btn-primary">Как зайти</a>
+<a href="https://discord.gg/q3A6Ncnrwr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Discord</a>
+</div></div></section>
 
-<section class="hero">
-    <div class="container">
-        <div class="hero-content">
-            <div class="tag">Minecraft War Server</div>
-
-            <h1>MWS — PVP сервер с военной тематикой</h1>
-
-            <p>
-                Небольшой проект в Minecraft про командную игру RF и NATO.
-                Игроки покупают снаряжение, используют транспорт, выполняют задачи
-                и участвуют в боях за территории.
-            </p>
-
-            <div class="buttons">
-                <a href="guide.html" class="btn btn-primary">Как зайти</a>
-                <a href="mechanics.html" class="btn btn-secondary">Механики</a>
-                <a href="map.html" class="btn btn-secondary">Карта</a>
-                <a href="schedule.html" class="btn btn-secondary">Расписание</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="about">
-    <div class="container">
-        <div class="section-title">
-            <h2>О сервере</h2>
-            <p>Коротко о том, что есть на MWS</p>
-        </div>
-
-        <div class="cards">
-            <div class="card">
-                <h3>Снаряжение</h3>
-                <p>
-                    Оружие, броня и наборы покупаются за деньги фракции.
-                    Поэтому фракциям нужно зарабатывать и следить за своей казной.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Транспорт</h3>
-                <p>
-                    Транспорт используется для передвижения, доставки и участия в боях.
-                    Некоторые работы и события завязаны на поездках по карте.
-                </p>
-            </div>
-
-            <div class="card">
-                <h3>Бои за территории</h3>
-                <p>
-                    Фракции выбирают место боя, готовятся, ставят временный спавн
-                    и сражаются ограниченное время.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="factions" class="features">
-    <div class="container">
-        <div class="section-title">
-            <h2>Фракции</h2>
-            <p>На сервере есть две основные стороны</p>
-        </div>
-
-        <div class="factions">
-            <div class="faction rf">
-                <h3>RF</h3>
-                <p>
-                    RF — вооружённые силы Российской Федерации. На сервере эта сторона
-                    представляет одну из двух военных структур, участвующих в боях за территории,
-                    снабжении и выполнении задач на карте.
-                </p>
-            </div>
-
-            <div class="faction nato">
-                <h3>NATO</h3>
-                <p>
-                    NATO — Североатлантический альянс. На сервере эта сторона представляет
-                    объединённую военную структуру, которая противостоит RF и также участвует
-                    в боях за территории, снабжении и выполнении задач.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<section id="join">
-    <div class="container">
-        <div class="section-title">
-            <h2>Как зайти</h2>
-            <p>Сначала нужна правильная версия игры и моды</p>
-        </div>
-
-        <div class="ip-box">
-            <h3>Инструкция</h3>
-
-            <p>
-                IP сервера находится на странице инструкции.
-                Перед входом нужно скачать сборку, поставить нужную версию Minecraft
-                и проверить, что лишние моды не мешают запуску.
-            </p>
-
-            <br>
-
-            <a href="guide.html" class="btn btn-primary">Как зайти</a>
-            <a href="https://discord.gg/q3A6Ncnrwr" class="btn btn-secondary" target="_blank" rel="noopener noreferrer">Discord</a>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>MWS © 2026</p>
-    </div>
-</footer>
-
-</body>
-</html>
+<footer><div class="container"><p>Washapso's Community Server © 2026</p></div></footer>
+</body></html>

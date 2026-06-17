@@ -1,505 +1,74 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MWS — Расписание</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #0b100c;
-            color: #f1f1f1;
-            line-height: 1.6;
-        }
-
-        header {
-            background: rgba(10, 14, 20, 0.95);
-            border-bottom: 1px solid #2b3a22;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav {
-            height: 70px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 26px;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: #ffffff;
-        }
-
-        .logo span {
-            color: #7fa650;
-        }
-
-        .nav-links a {
-            color: #cfd8c4;
-            text-decoration: none;
-            margin-left: 25px;
-            font-size: 15px;
-            transition: 0.2s;
-        }
-
-        .nav-links a:hover {
-            color: #7fa650;
-        }
-
-        .hero {
-            min-height: 85vh;
-            display: flex;
-            align-items: center;
-            background:
-                linear-gradient(rgba(8, 13, 9, 0.86), rgba(8, 13, 9, 0.96)),
-                url("background.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
-
-        .hero-content {
-            max-width: 720px;
-        }
-
-        .tag {
-            display: inline-block;
-            background: rgba(127, 166, 80, 0.16);
-            border: 1px solid rgba(127, 166, 80, 0.45);
-            color: #9fca68;
-            padding: 8px 14px;
-            border-radius: 30px;
-            font-size: 14px;
-            margin-bottom: 20px;
-        }
-
-        h1 {
-            font-size: 54px;
-            line-height: 1.1;
-            margin-bottom: 20px;
-        }
-
-        h1 span {
-            color: #7fa650;
-        }
-
-        .hero p {
-            color: #cfd8c4;
-            font-size: 18px;
-            margin-bottom: 30px;
-            max-width: 620px;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 24px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .btn-primary {
-            background: #7fa650;
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background: #6f9145;
-        }
-
-        .btn-secondary {
-            border: 1px solid #7fa650;
-            color: #7fa650;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(127, 166, 80, 0.14);
-        }
-
-        section {
-            padding: 80px 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 45px;
-        }
-
-        .section-title h2 {
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-
-        .section-title p {
-            color: #9aa892;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 25px;
-        }
-
-        .card {
-            background: #141a12;
-            border: 1px solid #2f3f25;
-            border-radius: 14px;
-            padding: 25px;
-            transition: 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            border-color: #7fa650;
-        }
-
-        .card h3 {
-            font-size: 22px;
-            margin-bottom: 12px;
-            color: #ffffff;
-        }
-
-        .card p {
-            color: #bdc8b5;
-            font-size: 15px;
-        }
-
-        .features {
-            background: #090d0a;
-        }
-
-        .factions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-
-        .faction {
-            border-radius: 14px;
-            padding: 30px;
-            border: 1px solid #2f3f25;
-            background: #141a12;
-        }
-
-        .faction.rf {
-            border-left: 5px solid #e74c3c;
-        }
-
-        .faction.nato {
-            border-left: 5px solid #9fca68;
-        }
-
-        .faction h3 {
-            margin-bottom: 10px;
-        }
-
-        .ip-box {
-            background: #141a12;
-            border: 1px solid #2f3f25;
-            border-radius: 16px;
-            padding: 35px;
-            text-align: center;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .ip {
-            margin: 20px 0;
-            padding: 16px;
-            background: #0b100c;
-            border: 1px dashed #7fa650;
-            border-radius: 10px;
-            font-size: 22px;
-            color: #7fa650;
-            word-break: break-all;
-        }
-
-        footer {
-            padding: 30px 0;
-            text-align: center;
-            border-top: 1px solid #2b3a22;
-            color: #9aa892;
-            background: #090d0a;
-        }
-
-
-        .btn-primary {
-            box-shadow: 0 0 18px rgba(127, 166, 80, 0.22);
-        }
-
-        .card:hover,
-        .faction:hover,
-        .ip-box:hover {
-            box-shadow: 0 0 24px rgba(127, 166, 80, 0.12);
-        }
-
-
-        .page-hero {
-            padding: 90px 0 45px;
-            background:
-                linear-gradient(rgba(8, 13, 9, 0.90), rgba(8, 13, 9, 0.98)),
-                url("background.png");
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            border-bottom: 1px solid #2b3a22;
-        }
-
-        .page-hero h1 {
-            font-size: 46px;
-            margin-bottom: 15px;
-        }
-
-        .page-hero p {
-            max-width: 760px;
-            color: #cfd8c4;
-            font-size: 18px;
-        }
-
-        .info-box {
-            background: #141a12;
-            border: 1px solid #2f3f25;
-            border-radius: 16px;
-            padding: 28px;
-            margin-bottom: 25px;
-        }
-
-        .info-box h3 {
-            margin-bottom: 12px;
-            color: #ffffff;
-            font-size: 24px;
-        }
-
-        .info-box p,
-        .info-box li {
-            color: #bdc8b5;
-        }
-
-        .info-box ul {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-
-        .map-placeholder {
-            background:
-                linear-gradient(rgba(20, 26, 18, 0.92), rgba(20, 26, 18, 0.92)),
-                repeating-linear-gradient(45deg, #1d2917 0, #1d2917 10px, #172013 10px, #172013 20px);
-            border: 1px dashed #7fa650;
-            border-radius: 18px;
-            padding: 55px 25px;
-            text-align: center;
-            color: #cfd8c4;
-            margin-bottom: 30px;
-        }
-
-        .map-placeholder h2 {
-            margin-bottom: 12px;
-            font-size: 32px;
-        }
-
-
-        .time-schedule {
-            max-width: 760px;
-            margin: 0 auto;
-            background: #141a12;
-            border: 1px solid #2f3f25;
-            border-radius: 18px;
-            overflow: hidden;
-            box-shadow: 0 0 24px rgba(127, 166, 80, 0.10);
-        }
-
-        .time-row {
-            display: grid;
-            grid-template-columns: 160px 1fr;
-            border-bottom: 1px solid #2f3f25;
-            transition: 0.2s;
-        }
-
-        .time-row:last-child {
-            border-bottom: none;
-        }
-
-        .time-row:hover {
-            background: rgba(127, 166, 80, 0.08);
-        }
-
-        .time-cell {
-            padding: 18px;
-            color: #bdc8b5;
-        }
-
-        .time-cell:first-child {
-            border-right: 1px solid #2f3f25;
-            color: #9fca68;
-            font-weight: bold;
-            font-size: 18px;
-            text-align: center;
-            background: #10160f;
-        }
-
-        .time-note {
-            max-width: 760px;
-            margin: 28px auto 0;
-            background: rgba(127, 166, 80, 0.10);
-            border: 1px solid rgba(127, 166, 80, 0.35);
-            border-radius: 16px;
-            padding: 22px;
-            color: #cfd8c4;
-            text-align: center;
-        }
-
-        @media (max-width: 650px) {
-            .time-row {
-                grid-template-columns: 1fr;
-            }
-
-            .time-cell:first-child {
-                border-right: none;
-                border-bottom: 1px solid #2f3f25;
-            }
-
-            .time-cell {
-                text-align: center;
-            }
-        }
-
-        @media (max-width: 700px) {
-            .nav {
-                height: auto;
-                padding: 18px 0;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .nav-links a {
-                margin: 0 8px;
-                font-size: 14px;
-            }
-
-            h1 {
-                font-size: 38px;
-            }
-
-            .hero {
-                min-height: 75vh;
-                text-align: center;
-            }
-
-            .buttons {
-                justify-content: center;
-            }
-        }
-        
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Washapso's Community Server — Расписание</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0b1020;color:#f2f6ff;line-height:1.6}
+header{background:rgba(8,13,28,.95);border-bottom:1px solid #23345f;position:sticky;top:0;z-index:10}
+.container{width:90%;max-width:1100px;margin:0 auto}
+.nav{min-height:70px;display:flex;justify-content:space-between;align-items:center;gap:15px}
+.logo{font-size:24px;font-weight:bold;letter-spacing:1px;color:#fff;text-decoration:none}
+.logo span{color:#4f8cff}
+.nav-links a{color:#d7e4ff;text-decoration:none;margin-left:22px;font-size:15px;transition:.2s}
+.nav-links a:hover{color:#4f8cff}
+.hero{padding:95px 0 65px;background:linear-gradient(rgba(8,13,28,.86),rgba(7,11,24,.98)),url("background.png");background-size:cover;background-position:center;background-repeat:no-repeat}
+.hero.home{min-height:82vh;display:flex;align-items:center}
+.hero-content{max-width:760px}
+.tag{display:inline-block;background:rgba(79,140,255,.16);border:1px solid rgba(79,140,255,.45);color:#8fb7ff;padding:8px 14px;border-radius:30px;font-size:14px;margin-bottom:20px}
+h1{font-size:48px;line-height:1.1;margin-bottom:18px}
+h1 span{color:#4f8cff}
+.hero p{color:#d7e4ff;font-size:18px;max-width:760px;margin-bottom:28px}
+section{padding:60px 0}.features{background:#080d1a}
+.section-title{text-align:center;margin-bottom:42px}
+.section-title h2{font-size:34px;margin-bottom:10px}.section-title p{color:#91a7d6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px}
+.card,.step,.ip-box{background:#101a33;border:1px solid #2a3f73;border-radius:14px;padding:25px;transition:.2s}
+.card:hover,.step:hover,.ip-box:hover{transform:translateY(-3px);border-color:#4f8cff;box-shadow:0 0 22px rgba(79,140,255,.10)}
+.card h3,.step h2,.ip-box h3{color:#fff;font-size:22px;margin-bottom:12px}
+.card p,.step p,.ip-box p,li{color:#c7d6f2;font-size:15px}
+ul{margin-left:20px;margin-top:10px}
+.buttons{display:flex;gap:14px;flex-wrap:wrap}
+.btn{display:inline-block;padding:14px 22px;border-radius:8px;text-decoration:none;font-weight:bold;transition:.2s;margin-top:5px}
+.btn-primary{background:#4f8cff;color:white;box-shadow:0 0 18px rgba(79,140,255,.20)}
+.btn-primary:hover{background:#3f72d6}
+.btn-secondary{border:1px solid #4f8cff;color:#4f8cff}
+.btn-secondary:hover{background:rgba(79,140,255,.14)}
+.ip{margin-top:12px;padding:16px;background:#0b1020;border:1px dashed #4f8cff;border-radius:10px;font-size:21px;color:#4f8cff;word-break:break-all;display:inline-block}
+.steps{display:grid;gap:22px}.warning{border-left:5px solid #d8674a}.note{color:#91a7d6;font-size:14px;margin-top:10px}
+.time-schedule{max-width:760px;margin:0 auto;background:#101a33;border:1px solid #2a3f73;border-radius:18px;overflow:hidden;box-shadow:0 0 24px rgba(79,140,255,.10)}
+.time-row{display:grid;grid-template-columns:160px 1fr;border-bottom:1px solid #2a3f73;transition:.2s}
+.time-row:last-child{border-bottom:none}.time-row:hover{background:rgba(79,140,255,.08)}
+.time-cell{padding:18px;color:#c7d6f2}.time-cell:first-child{border-right:1px solid #2a3f73;color:#8fb7ff;font-weight:bold;font-size:18px;text-align:center;background:#0d162b}
+.time-note{max-width:760px;margin:28px auto 0;background:rgba(79,140,255,.10);border:1px solid rgba(79,140,255,.35);border-radius:16px;padding:22px;color:#d7e4ff;text-align:center}
+footer{padding:30px 0;text-align:center;border-top:1px solid #23345f;color:#91a7d6;background:#080d1a}
+@media(max-width:700px){.nav{padding:18px 0;flex-direction:column}.nav-links{text-align:center}.nav-links a{margin:0 8px;font-size:14px}h1{font-size:36px}.hero{text-align:center}.buttons{justify-content:center}.time-row{grid-template-columns:1fr}.time-cell:first-child{border-right:none;border-bottom:1px solid #2a3f73}.time-cell{text-align:center}}
+</style>
 </head>
-
 <body>
+<header><div class="container"><div class="nav">
+<a href="index.html" class="logo">Washapso<span>'s Community</span></a>
+<div class="nav-links">
+<a href="index.html">Главная</a>
+<a href="mechanics.html">Механики</a>
+<a href="schedule.html">Расписание</a>
+<a href="guide.html">Как зайти</a>
+</div></div></div></header>
 
-<header>
-    <div class="container">
-        <div class="nav">
-            <div class="logo">M<span>WS</span></div>
+<section class="hero"><div class="container"><div class="tag">Расписание</div><h1>Расписание сервера</h1><p>Здесь указано примерное время открытия сервера и игровых сессий. Если что-то меняется, актуальная информация будет в Discord.</p></div></section>
+<section><div class="container"><div class="section-title"><h2>Время</h2><p>Расписание может меняться во время тестов и обновлений</p></div>
+<div class="time-schedule">
+<div class="time-row"><div class="time-cell">13:45</div><div class="time-cell">Открытие сервера</div></div>
+<div class="time-row"><div class="time-cell">14:00</div><div class="time-cell">Начало обычной игры</div></div>
+<div class="time-row"><div class="time-cell">14:00 - 16:00</div><div class="time-cell">Строительство города, работа, торговля, добыча ресурсов</div></div>
+<div class="time-row"><div class="time-cell">16:00 - 18:00</div><div class="time-cell">Свободная игра, события, политика, походы в шахты и подземелья</div></div>
+<div class="time-row"><div class="time-cell">Каждые 3 дня</div><div class="time-cell">Выборы правителя</div></div>
+</div>
+<div class="time-note">Если сервер не открыт в указанное время, значит идут технические работы, настройка модов или подготовка обновления.</div>
+<br><div class="buttons" style="justify-content:center"><a href="https://discord.gg/q3A6Ncnrwr" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Discord</a><a href="guide.html" class="btn btn-secondary">Как зайти</a></div>
+</div></section>
 
-            <div class="nav-links">
-                <a href="index.html">Главная</a>
-                <a href="mechanics.html">Механики</a>
-                <a href="map.html">Карта</a>
-                <a href="schedule.html">Расписание</a>
-                <a href="guide.html">Как зайти</a>
-            </div>
-        </div>
-    </div>
-</header>
-
-<section class="page-hero">
-    <div class="container">
-        <div class="tag">Расписание MWS</div>
-
-        <h1>Расписание работы сервера</h1>
-
-        <p>
-            Здесь указано только время открытия сервера и основных игровых сессий.
-        </p>
-    </div>
-</section>
-
-<section>
-    <div class="container">
-        <div class="section-title">
-            <h2>Время</h2>
-            <p>Актуальные изменения публикуются в Discord</p>
-        </div>
-
-        <div class="time-schedule">
-            <div class="time-row">
-                <div class="time-cell">13:45</div>
-                <div class="time-cell">Открытие сервера</div>
-            </div>
-
-            <div class="time-row">
-                <div class="time-cell">14:00</div>
-                <div class="time-cell">Начало обычной игры</div>
-            </div>
-
-            <div class="time-row">
-                <div class="time-cell">14:15 - 15:00</div>
-                <div class="time-cell">Столкновения и подготовка к боям</div>
-            </div>
-
-            <div class="time-row">
-                <div class="time-cell">15:00 - 16:00</div>
-                <div class="time-cell">Бои за территории</div>
-            </div>
-
-            <div class="time-row">
-                <div class="time-cell">16:00 - 18:00</div>
-                <div class="time-cell">Свободная игра / завершение активных событий</div>
-            </div>
-        </div>
-
-        <div class="time-note">
-            Если сервер не открыт в указанное время, значит идут технические работы,
-            настройка карты, модов или подготовка обновления.
-        </div>
-
-        <br>
-
-        <div class="buttons" style="justify-content: center;">
-            <a href="https://discord.gg/q3A6Ncnrwr" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Discord сервера</a>
-            <a href="guide.html" class="btn btn-secondary">Как зайти</a>
-        </div>
-    </div>
-</section>
-
-<footer>
-    <div class="container">
-        <p>MWS - Military Warfare Server © 2026</p>
-    </div>
-</footer>
-
-</body>
-</html>
+<footer><div class="container"><p>Washapso's Community Server © 2026</p></div></footer>
+</body></html>
