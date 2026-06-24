@@ -163,6 +163,7 @@ ul{margin-left:20px;margin-top:10px}
   font-weight:800;
   transition:.2s;
 }
+.btn + .btn{margin-left:10px}
 .btn-primary{color:#17120a;background:linear-gradient(135deg,#f1c76b,var(--gold));box-shadow:0 0 24px rgba(227,183,90,.2)}
 .btn-primary:hover{transform:translateY(-2px);filter:brightness(1.05)}
 .btn-secondary{color:#dfe8f8;border:1px solid rgba(109,167,255,.55);background:rgba(109,167,255,.08)}
@@ -201,6 +202,7 @@ footer{padding:30px 0;text-align:center;color:var(--muted);border-top:1px solid 
   .pill-row{justify-content:center}
   .pill{font-size:13px;padding:7px 9px}
   .btn{min-height:44px;padding:11px 16px}
+  .btn + .btn{margin-left:0}
   .buttons{justify-content:center}
   .time-row{grid-template-columns:1fr}
   .time-cell:first-child{border-right:none;border-bottom:1px solid var(--line)}
